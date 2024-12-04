@@ -29,7 +29,7 @@ Usage
 This API allows users to manage a social network by creating, updating, and deleting users, thoughts, reactions, and friendships. Using tools like Insomnia, you can test endpoints to perform CRUD operations for users and thoughts, add and remove friends, and manage reactions to thoughts. The database is managed with MongoDB and Mongoose.
 
 ## Walkthrough
-[Video](https://www.veed.io/view/85df5794-33f0-4eb1-8bd2-3ee6c9f003d0?panel=share)
+[Video](https://www.loom.com/share/db8faf3bd2f740328994c3b2db86cd66?sid=35f5a56a-6c76-4bf8-bfa2-4e125aaf7385)
 ## Credits
 
 ## License
