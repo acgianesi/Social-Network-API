@@ -1,6 +1,8 @@
 import express, {Request, Response}  from "express";
 import mongoose from "mongoose";
 import User from './models/User';
+import userRoutes from './routes/userRoutes'; 
+import thoughtRoutes from './routes/thoughtRoutes';
 
 // port
 const app = express();
@@ -9,6 +11,7 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 // connection to MongoDB
 const connectionStringURI = 'mongodb://127.0.0.1:27017/social_network';
 
@@ -16,6 +19,8 @@ mongoose.connect(connectionStringURI);
 mongoose.connection.once('open', () => {
   console.log('Mongoose is connected to MongoDB.');
 });
+app.use('/api/users', userRoutes);
+app.use('/api/thoughts', thoughtRoutes); 
 
 // 
 app.post('/api/users', async (req: Request, res: Response) => {
