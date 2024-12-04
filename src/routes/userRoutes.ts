@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { RequestHandler, Router } from 'express';
 import User from '../models/User';
 import { Request, Response, } from 'express';
 
@@ -26,26 +26,23 @@ router.put('/:userId', async (req: Request, res: Response) => {
 });
 
 
-// could not get to fix it post and delete
+ router.post('/:userId/friends/:friendId', (async (req: Request, res: Response) => {
+  const user = await User.findById(req.params.userId);
+  const friend = await User.findById(req.params.friendId);
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
 
-//  POST 
-//  router.post('/:userId/friends/:friendId', async (req: Request, res: Response) => {
-//   const user = await User.findById(req.params.userId);
-//   const friend = await User.findById(req.params.friendId);
-//   if (!user) {
-//     return res.status(404).json({ message: "User not found" });
-//   }
-
-//   if (!friend) {
-//     return res.status(404).json({ message: "Friend not found" });
-//   }
-//   user.friends.push(friend._id);
-//   await user.save();
-//   res.json(user);
-// // });
+  if (!friend) {
+    return res.status(404).json({ message: "Friend not found" });
+  }
+  user.friends.push(friend._id);
+  await user.save();
+  res.json({ message: 'Friend added successfully' });
+}) as RequestHandler );
 
 // DELETE 
-// router.delete('/:userId/friends/:friendId', async (req: Request, res: Response) => {
+// router.delete('/:userId/friends/:friendId', (async (req: Request, res: Response) => {
 //   const user = await User.findById(req.params.userId);
 //   if (!user) {
 //     return res.status(404).json({ message: "User not found" });
@@ -53,6 +50,6 @@ router.put('/:userId', async (req: Request, res: Response) => {
 //   user.friends.pull(req.params.friendId);
 //   await user.save();
 //   res.json(user);
-// });
+// }) as RequestHandler);
 
 // export default router;
