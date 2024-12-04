@@ -52,4 +52,4 @@ router.put('/:userId', async (req: Request, res: Response) => {
 //   res.json(user);
 // }) as RequestHandler);
 
-// export default router;
+export default router;
